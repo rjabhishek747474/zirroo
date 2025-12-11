@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
-import { Privacy } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ListsService {
@@ -40,7 +40,7 @@ export class ListsService {
         const lists = await this.prisma.list.findMany({
             where: {
                 OR: [
-                    { privacy: Privacy.PUBLIC },
+                    { privacy: Prisma.Privacy.PUBLIC },
                     ...(options?.userId ? [{ userId: options.userId }] : []),
                 ],
             },
@@ -105,7 +105,7 @@ export class ListsService {
         }
 
         // Check privacy
-        if (list.privacy === Privacy.PRIVATE && list.userId !== userId) {
+        if (list.privacy === Prisma.Privacy.PRIVATE && list.userId !== userId) {
             throw new ForbiddenException('This list is private');
         }
 
