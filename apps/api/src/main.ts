@@ -42,7 +42,7 @@ async function bootstrap() {
 
     console.log(`
 ╔═══════════════════════════════════════════════════╗
-║             ListShare API Server                   ║
+║             Zirroo API Server                   ║
 ╠═══════════════════════════════════════════════════╣
 ║  🚀 Server running on: http://localhost:${port}        ║
 ║  📚 Environment: ${configService.get('NODE_ENV') || 'development'}                   ║

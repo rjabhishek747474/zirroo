@@ -34,7 +34,7 @@ export function Sidebar() {
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                         <Sparkles className="h-5 w-5" />
                     </div>
-                    <span className="text-xl font-bold">ListShare</span>
+                    <span className="text-xl font-bold">Zirroo</span>
                 </div>
 
                 {/* Navigation */}

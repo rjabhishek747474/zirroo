@@ -7,12 +7,12 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-    title: 'ListShare - Share Your Lists With The World',
+    title: 'Zirroo - Share Your Lists With The World',
     description: 'A social platform for sharing curated lists with AI-powered recommendations',
     keywords: ['lists', 'sharing', 'social', 'curation', 'AI', 'recommendations'],
-    authors: [{ name: 'ListShare' }],
+    authors: [{ name: 'Zirroo' }],
     openGraph: {
-        title: 'ListShare',
+        title: 'Zirroo',
         description: 'Share your lists with the world',
         type: 'website',
     },

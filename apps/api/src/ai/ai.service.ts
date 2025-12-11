@@ -21,8 +21,8 @@ export class AiService {
         }
 
         const systemPrompt = context?.listTitle
-            ? `You are a helpful AI assistant for ListShare. The user is viewing a list called "${context.listTitle}" with items: ${context.items?.join(', ')}. Help them with questions about this list.`
-            : 'You are a helpful AI assistant for ListShare, a social platform for sharing curated lists. Help users discover, create, and manage their lists.';
+            ? `You are a helpful AI assistant for Zirroo. The user is viewing a list called "${context.listTitle}" with items: ${context.items?.join(', ')}. Help them with questions about this list.`
+            : 'You are a helpful AI assistant for Zirroo, a social platform for sharing curated lists. Help users discover, create, and manage their lists.';
 
         try {
             const result = await this.model.generateContent([

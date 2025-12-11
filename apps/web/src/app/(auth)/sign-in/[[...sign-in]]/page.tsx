@@ -7,7 +7,7 @@ export default function SignInPage() {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold">Welcome Back</h1>
                     <p className="mt-2 text-muted-foreground">
-                        Sign in to continue to ListShare
+                        Sign in to continue to Zirroo
                     </p>
                 </div>
                 <SignIn

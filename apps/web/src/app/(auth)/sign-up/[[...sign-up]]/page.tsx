@@ -7,7 +7,7 @@ export default function SignUpPage() {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold">Create Account</h1>
                     <p className="mt-2 text-muted-foreground">
-                        Join ListShare and start sharing your lists
+                        Join Zirroo and start sharing your lists
                     </p>
                 </div>
                 <SignUp

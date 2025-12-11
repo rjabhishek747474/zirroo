@@ -2,9 +2,9 @@ services:
   # PostgreSQL with pgvector extension
   postgres:
     image: pgvector/pgvector:pg16
-    container_name: listshare-postgres
+    container_name: zirroo-postgres
     environment:
-      POSTGRES_DB: listshare
+      POSTGRES_DB: zirroo
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -20,7 +20,7 @@ services:
   # Redis for caching and BullMQ
   redis:
     image: redis:alpine
-    container_name: listshare-redis
+    container_name: zirroo-redis
     ports:
       - "6379:6379"
     volumes:
@@ -36,10 +36,10 @@ services:
     build:
       context: ./apps/api
       dockerfile: Dockerfile
-    container_name: listshare-api
+    container_name: zirroo-api
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/listshare
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/zirroo
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     ports:
@@ -57,7 +57,7 @@ services:
     build:
       context: ./apps/web
       dockerfile: Dockerfile
-    container_name: listshare-web
+    container_name: zirroo-web
     environment:
       - NODE_ENV=production
     ports:

@@ -12,7 +12,7 @@ export class WinstonLogger implements LoggerService {
                 winston.format.errors({ stack: true }),
                 winston.format.json(),
             ),
-            defaultMeta: { service: 'listshare-api' },
+            defaultMeta: { service: 'zirroo-api' },
             transports: [
                 new winston.transports.Console({
                     format: winston.format.combine(

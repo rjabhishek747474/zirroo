@@ -1,4 +1,4 @@
-# ListShare v2
+# Zirroo
 
 A modern list-curation social platform built with Next.js, NestJS, PostgreSQL, and AI.
 
