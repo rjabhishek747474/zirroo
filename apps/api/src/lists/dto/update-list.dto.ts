@@ -1,5 +1,5 @@
 import { IsString, IsOptional, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { Prisma } from '@prisma/client';
+import { Privacy } from '../../common/enums/privacy.enum';
 
 export class UpdateListDto {
     @IsOptional()
