@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+// ============================================================
+// USER MODEL
+// ============================================================
+model User {
+  id          String   @id @default(cuid())
+  clerkId     String   @unique
+  email       String   @unique
+  username    String   @unique
+  displayName String?
+  avatar      String?
+  bio         String?
+  isVerified  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  lists     List[]
+  saves     Save[]
+  likes     Like[]
+  followers Follow[] @relation("following")
+  following Follow[] @relation("follower")
+
+  @@index([clerkId])
+  @@index([email])
+  @@index([username])
+}
+
+// ============================================================
+// LIST MODEL
+// ============================================================
+model List {
+  id          String                         @id @default(cuid())
+  title       String
+  description String?
+  coverImage  String?
+  privacy     Privacy                        @default(PUBLIC)
+  category    String?
+  embedding   Unsupported("vector(1536)")?
+  viewCount   Int                            @default(0)
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  items Item[]
+  saves Save[]
+  likes Like[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([privacy])
+  @@index([category])
+  @@index([createdAt(sort: Desc)])
+}
+
+// ============================================================
+// ITEM MODEL
+// ============================================================
+model Item {
+  id          String                         @id @default(cuid())
+  title       String
+  description String?
+  url         String?
+  image       String?
+  position    Int                            @default(0)
+  embedding   Unsupported("vector(1536)")?
+
+  // Link preview data from Metascraper
+  linkPreview Json?
+
+  // Relations
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([listId])
+  @@index([position])
+}
+
+// ============================================================
+// SOCIAL MODELS
+// ============================================================
+model Save {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, listId])
+  @@index([userId])
+  @@index([listId])
+}
+
+model Like {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, listId])
+  @@index([userId])
+  @@index([listId])
+}
+
+model Follow {
+  id String @id @default(cuid())
+
+  followerId String
+  follower   User   @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+
+  followingId String
+  following   User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+enum Privacy {
+  PUBLIC
+  PRIVATE
+  SHARED
+}
