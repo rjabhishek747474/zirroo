@@ -2,12 +2,10 @@ FROM node:18-alpine AS base
 
 # Builder stage
 FROM base AS builder
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN npm install -g turbo
 COPY . .
-# Prune the workspace to just what is needed for the api
 RUN turbo prune --scope=@zirroo/api --docker
 
 # Installer stage
@@ -19,12 +17,20 @@ WORKDIR /app
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/package-lock.json ./package-lock.json
+
+# Copy schema explicitly to ensure availability before install/generate
+COPY apps/api/prisma/schema.prisma ./apps/api/prisma/schema.prisma
+
+# Install dependencies (using npm install for robustness with pruned lockfiles)
 RUN npm install
 
-# Then build the project
+# Copy full source
 COPY --from=builder /app/out/full/ .
-# Generate prisma client
-RUN npx --prefix apps/api prisma generate
+
+# Generate prisma client explicitly
+RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
+
+# Build the project
 RUN npm run build --workspace=@zirroo/api
 
 # Runner stage
