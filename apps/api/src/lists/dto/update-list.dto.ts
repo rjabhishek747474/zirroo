@@ -18,8 +18,8 @@ export class UpdateListDto {
     coverImage?: string;
 
     @IsOptional()
-    @IsEnum(Prisma.Privacy)
-    privacy?: Prisma.Privacy;
+    @IsEnum(Privacy)
+    privacy?: Privacy;
 
     @IsOptional()
     @IsString()

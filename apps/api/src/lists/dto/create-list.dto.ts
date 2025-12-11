@@ -1,5 +1,5 @@
 import { IsString, IsOptional, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { Prisma } from '@prisma/client';
+import { Privacy } from '@prisma/client';
 
 export class CreateListDto {
     @IsString()
@@ -17,8 +17,8 @@ export class CreateListDto {
     coverImage?: string;
 
     @IsOptional()
-    @IsEnum(Prisma.Privacy)
-    privacy?: Prisma.Privacy;
+    @IsEnum(Privacy)
+    privacy?: Privacy;
 
     @IsOptional()
     @IsString()
