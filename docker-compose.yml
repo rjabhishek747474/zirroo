@@ -34,8 +34,8 @@ services:
   # NestJS API (production only)
   api:
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/api/Dockerfile
     container_name: zirroo-api
     environment:
       - NODE_ENV=production
@@ -55,8 +55,8 @@ services:
   # Next.js Web (production only)
   web:
     build:
-      context: ./apps/web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/web/Dockerfile
     container_name: zirroo-web
     environment:
       - NODE_ENV=production
