@@ -1,5 +1,5 @@
 import { IsString, IsOptional, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { Privacy } from '../../common/enums/privacy.enum';
+import { Privacy } from '@zirroo/types';
 
 export class UpdateListDto {
     @IsOptional()

@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@nestjs/common": "^10.4.4",
+        "@zirroo/types": "*",
         "@nestjs/core": "^10.4.4",
         "@nestjs/platform-express": "^10.4.4",
         "@nestjs/config": "^3.2.3",

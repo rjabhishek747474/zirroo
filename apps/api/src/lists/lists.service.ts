@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
-import { Privacy } from '../common/enums/privacy.enum';
+import { Privacy } from '@zirroo/types';
 
 @Injectable()
 export class ListsService {

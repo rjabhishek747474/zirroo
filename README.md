@@ -128,7 +128,18 @@ npm run dev
 - **Web App**: [http://localhost:3000](http://localhost:3000)
 - **API Server**: [http://localhost:3001](http://localhost:3001)
 
-## 🏗️ Build & Deployment
+## 🏗 Project Structure
+
+This project is a **Monorepo** managed by [Turborepo](https://turbo.build/).
+
+### Apps
+- **`apps/web`**: Next.js frontend (App Router). Deployment: Vercel.
+- **`apps/api`**: NestJS backend. Deployment: Railway.
+
+### Packages
+- **`packages/types`**: Shared TypeScript definitions and Enums used by both frontend and backend.
+
+## 🚀 Deployment
 
 ### Building for Production
 ```bash
